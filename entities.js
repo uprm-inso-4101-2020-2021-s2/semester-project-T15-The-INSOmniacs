@@ -12,18 +12,16 @@ class Student{
 }
 
 class Course{
-    constructor(Course_ID, CourseName, CourseNumber, Section, Homeworks, Exams, Projects,
-        Professor, StudentsEnrolled, Chat_Link, Private, Admins, DateCreated, Resources){
+    constructor(Course_ID, CourseName, CourseNumber, Section, Tasks,
+        Professor, StudentsEnrolled, ChatLinks, Private, Admins, DateCreated, Resources){
             this.Course_ID = Course_ID;
             this.CourseName = CourseName;
             this.CourseNumber = CourseNumber;
             this.Section = Section;
-            this.Homeworks = Homeworks;
-            this.Exams = Exams;
-            this.Projects = Projects;
+            this.Tasks = Tasks;
             this.Professor = Professor;
             this.StudentsEnrolled = StudentsEnrolled;
-            this.Chat_Link = Chat_Link;
+            this.ChatLinks = Chat_Links;
             this.Private = Private;
             this.Admins = Admins;
             this.DateCreated = DateCreated;
