@@ -1,0 +1,23 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Verónica Bernier",
+      "email": "vero@gm.com",
+      "password": "pass.word"
+    },
+    {
+      "id": 2,
+      "name": "Sample Name",
+      "email": "myemail@woo.com",
+      "password": "woakj818"
+    },
+    {
+      "name": "ver",
+      "email": "oihouuo",
+      "password": "56789",
+      "passwordConfirmation": "56789",
+      "id": 3
+    }
+  ]
+}
