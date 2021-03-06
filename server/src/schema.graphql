@@ -27,3 +27,63 @@ type User {
     email: String!
     links: [Link!]!
 }
+
+#Preliminary Schema for Students, Courses, Tasks, etc.
+#More specific "User". Will eventually replace User definition
+#TODO: Check non nullable vs nullable (might be changed)
+#TODO: Implemenenting foreign keys
+type Student {
+    id: ID!
+    firstName: String!
+    lastName: String!
+    universityName: String!
+    email: String!
+    courses: [Course!]!
+}
+
+type Course {
+    id: ID!
+    name: String!
+    number: String!
+    section: Int!
+    tasks: [Task!]!
+    professor: String!
+    studentsEnrolled: [Student!]!
+    chatLinks: [String!]!
+    private: Boolean!
+    admins: [Student!]!
+    dateCreated: String!
+    resources: [Resource!]!
+}
+
+type Task {
+    id: ID!
+    taskType: String!
+    title: String!
+    description: String!
+    dueDate: String!
+    daysRemaining: Int!
+    gradePercentage: Float
+    createdBy: Student!
+    resources: [Resource!]!
+}
+
+type Resource {
+    id: ID!
+    title: String!
+    link: String!
+}
+
+type Calendar {
+    id: ID!
+    createdBy: Student!
+    courses: [Course!]!
+    tasks: [Task!]!
+}
+
+type Reminder {
+    id: ID!
+    taskType: String!
+    dueDate: String!
+    taskTitle: String!
+}
