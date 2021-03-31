@@ -15,6 +15,15 @@ function Nav() {
             <Link style={navStyle} to="/calendar">
                 <li>Calendar</li>
             </Link>
+            <Link style={navStyle} to="/courses">
+                <li>Courses</li>
+            </Link>
+            <Link style={navStyle} to="/tasks">
+                <li>Tasks</li>
+            </Link>
+            <Link style={navStyle} to="/resources">
+                <li>Resources</li>
+            </Link>
             <Link style={navStyle} to="/about">
                 <li>About</li>
             </Link>
