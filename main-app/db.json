@@ -1,0 +1,35 @@
+{
+  "tasks": [
+    {
+      "text": "Assignment #2",
+      "day": "2021-04-14",
+      "time": "22:35",
+      "reminder": true,
+      "id": 1
+    },
+    {
+      "text": "Exam",
+      "day": "2021-04-01",
+      "time": "21:34",
+      "reminder": false,
+      "id": 2
+    },
+    {
+      "text": "Exam Fisica",
+      "day": "2021-04-06",
+      "time": "18:47",
+      "description": "Partial exam #2 ",
+      "reminder": false,
+      "id": 3
+    },
+    {
+      "course": "Fisica 1",
+      "text": "Examen",
+      "day": "2021-04-05",
+      "time": "18:57",
+      "description": "Examen parcial #3 - Moodle",
+      "reminder": true,
+      "id": 4
+    }
+  ]
+}

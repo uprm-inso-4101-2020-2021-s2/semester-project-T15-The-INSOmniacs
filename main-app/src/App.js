@@ -2,7 +2,7 @@ import './App.css'
 import Nav from './components/Nav';
 import Calendar from './components/Calendar';
 import About from './components/About';
-import Tasks from './components/Tasks';
+import Tasks from './components/TasksTab';
 import Courses from './components/Courses';
 import Resources from './components/Resources';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
