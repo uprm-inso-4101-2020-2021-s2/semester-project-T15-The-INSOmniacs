@@ -1,1 +1,5 @@
 /server/node_modules
+/flaskProject/.venv
+**/__pycache__/
+.vscode/settings.json
+.env
