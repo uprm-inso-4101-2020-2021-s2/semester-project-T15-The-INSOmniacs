@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from controller.students import Students
 from controller.tasks import Tasks
+from controller.resources import Resources
 
 app = Flask(__name__)
 CORS(app)
@@ -73,17 +74,28 @@ def manageTasks(t_id):
 # Resource Management Routes
 
 @app.route("/OfCourse/resources/")
-def addResource():
-    return "foo"
+def manageResources():
+    if request.method == "GET":
+        return Resources().getAllResources()
+    elif request.method == "POST":
+        return Resources().addResource(r_json=request.json)
+    else:
+        return jsonify("Method Not Allowed"), 405
+
+
+@app.route("/OfCourse/resources/<int:r_id>", methods=["GET", "PUT", "DELETE"])
+def manageResource(r_id):
+    if request.method == "GET":
+        return Resources().getResourceByID(r_id)
+    elif request.method == "PUT":
+        return Resources().updateResourceByID(r_id, request.json)
+    elif request.method == "DELETE":
+        return Resources().deleteResourceByID(r_id)
+    else:
+        return jsonify("Method Not Allowed"), 405
 
 
 # Calendar Management Routes
-
-app.route("/OfCourse/calendars/")
-
-
-def getCalendar():
-    return "foo"
 
 
 if __name__ == '__main__':

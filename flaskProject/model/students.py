@@ -40,9 +40,15 @@ class StudentsDAO:
     def updateStudentByID(self, s_id, s_fname, s_lname, s_university, s_email, s_password, old_s_id):
         cursor = self.conn.cursor()
         test_query = "select s_id from students where s_id = %s"
+        cursor.execute(test_query, (old_s_id,))
+        # Check to see if the student you want to update exists
+        if not cursor.rowcount:
+            return 0
+
+        test_query = "select s_id from students where s_id = %s"
         cursor.execute(test_query, (s_id, ))
         # If there's another with an ID identical to the one we want to update with, we cannot update
-        if cursor.rowcount:
+        if cursor.rowcount and s_id != old_s_id:
             return 2
 
         query = "\

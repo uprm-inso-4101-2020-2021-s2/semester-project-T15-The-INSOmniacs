@@ -17,13 +17,14 @@ class Students:
         return result
 
     def build_attr_dict(self, s_id, s_fname, s_lname, s_university, s_email, s_password):
-        result = {}
-        result['s_id'] = s_id
-        result['s_fname'] = s_fname
-        result['s_lname'] = s_lname
-        result['s_university'] = s_university
-        result['s_email'] = s_email
-        result['s_password'] = s_password
+        result = {
+            's_id': s_id,
+            's_fname': s_fname,
+            's_lname': s_lname,
+            's_university': s_university,
+            's_email': s_email,
+            's_password': s_password
+        }
         return result
 
     # DAO = Data Access Object
