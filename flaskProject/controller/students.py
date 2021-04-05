@@ -34,6 +34,7 @@ class Students:
         student_list = dao.getAllStudents()
         # Modify info in a json-friendly format
         return_list = [self.build_map_dict(student) for student in student_list]
+        print("GET - Students: processed")
         return jsonify(return_list)
 
     def addStudent(self, s_json):
@@ -43,19 +44,20 @@ class Students:
         s_university = s_json["s_university"]
         s_email = s_json["s_email"]
         s_password = s_json["s_password"]
-        print("HERE")
         dao = StudentsDAO()
 
         # Run the command to add a student that returns their ID
         s_id = dao.addStudent(s_fname, s_lname, s_university, s_email, s_password)
 
         # Return the students info with their newly generated ID as a json
+        print("POST - Student: processed")
         return jsonify(self.build_attr_dict(s_id, s_fname, s_lname, s_university, s_email, s_password)), 201
 
     def getStudentByID(self, s_id):
         # Execute necessary operations to find the student by their ID
         dao = StudentsDAO()
         student_info = dao.getStudentByID(s_id)
+        print("GET - Student: processed")
         if not student_info:
             return jsonify("Not Found"), 404
         else:
@@ -75,6 +77,7 @@ class Students:
         dao = StudentsDAO()
         edited = dao.updateStudentByID(s_id, s_fname, s_lname, s_university, s_email, s_password, old_s_id)
         # Return a json with the students new info
+        print("PUT - Student: processed")
         if edited == 1:
             result = self.build_attr_dict(s_id, s_fname, s_lname, s_university, s_email, s_password)
             return jsonify(result), 200
@@ -87,6 +90,7 @@ class Students:
         # Execute Order 66 on the student
         dao = StudentsDAO()
         executed = dao.deleteStudent(s_id)
+        print("DELETE - Student: processed")
         if executed:
             return jsonify("DELETED"), 200
         else:

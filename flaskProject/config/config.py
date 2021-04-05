@@ -15,5 +15,4 @@ def connect(self):
         pg_config["password"],
         pg_config["dbport"],
     )
-    print("connection url:  ", connection_url)
     self.conn = psycopg2.connect(connection_url)

@@ -21,10 +21,8 @@ def home():
 @app.route("/OfCourse/students/", methods=["GET", "POST"])
 def manageStudents():
     if request.method == "GET":
-        print("Here" + request.method)
         return Students().getAllStudents()
     elif request.method == "POST":
-        print("There" + request.method)
         return Students().addStudent(s_json=request.json)
     else:
         return jsonify("Method Not Allowed"), 405
