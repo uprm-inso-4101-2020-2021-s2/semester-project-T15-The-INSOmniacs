@@ -61,11 +61,11 @@ def getAllTasks():
 
 @app.route("/OfCourse/tasks/<int:t_id>", methods=["GET", "PUT", "DELETE"])
 def manageTasks(t_id):
-    if request.method == "GET":
+    if request.method == "GET": # returns a json of the task
         return Tasks().getTaskByID(t_id)
-    elif request.method == "PUT":
+    elif request.method == "PUT": # updates task with given json
         return Tasks().updateTaskByID(t_id, request.json)
-    elif request.method == "DELETE":
+    elif request.method == "DELETE": # deletes the task
         return Tasks().deleteTaskByID(t_id)
     else:
         return jsonify("Method not Allowed"), 405
