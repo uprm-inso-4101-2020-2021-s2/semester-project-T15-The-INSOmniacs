@@ -49,3 +49,26 @@ class TasksDAO:
         executed = cursor.rowcount
         self.conn.commit()
         return executed
+
+    def getStudentTasksByID(self, s_id):
+        cursor = self.conn.cursor()
+        test_query = "select s_id from students where s_id = %s"
+        cursor.execute(test_query, (s_id,))
+        # Check to see if the student is registered
+        if not cursor.rowcount:
+            return -1
+
+        # Getting personal tasks
+        query = "select t_id, t_type, t_title, t_description, t_due_date, t_due_time \
+        from tasks natural inner join personal_tasks \
+        where s_id = %s;"
+        cursor.execute(query, (s_id,))
+        result_list = [task for task in cursor]
+
+        # Getting all course tasks
+        query = "select t_id, t_type, t_title, t_description, t_due_date, t_due_time \
+        from tasks natural inner join enrolled natural inner join course_tasks \
+        where s_id = %s;"
+        cursor.execute(query, (s_id,))
+        result_list.extend([task for task in cursor])
+        return result_list

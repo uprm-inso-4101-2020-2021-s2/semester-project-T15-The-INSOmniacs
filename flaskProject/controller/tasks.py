@@ -30,7 +30,7 @@ class Tasks:
         dao = TasksDAO()
         task_list = dao.getAllTasks()
         result_list = [self.build_map_dict(task) for task in task_list]
-        return jsonify(result_list)
+        return jsonify(result_list), 200
 
     def getTaskByID(self, t_id):
         dao = TasksDAO()
@@ -67,3 +67,14 @@ class Tasks:
             return jsonify("Deleted"), 200
         else:
             return jsonify("Not Found"), 404
+
+    def getStudentTasksByID(self, s_id):
+        dao = TasksDAO()
+        task_list = dao.getStudentTasksByID(s_id)
+        if task_list == -1:
+            return jsonify("Student not found"), 404
+        elif not task_list:
+            return jsonify("No tasks found"), 404
+        else:
+            result_list = [self.build_map_dict(task) for task in task_list]
+            return jsonify(result_list), 200
