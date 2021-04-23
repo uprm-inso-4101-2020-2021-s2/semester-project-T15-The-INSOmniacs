@@ -34,20 +34,6 @@ class Resources:
         print("GET - Resources: processed")
         return jsonify(return_list)
 
-    def addResource(self, r_json):
-        # Break down student info from the given json
-        r_title = r_json["r_title"]
-        r_link = r_json["r_link"]
-        r_owner_id = r_json["r_owner_id"]
-        dao = ResourcesDAO()
-
-        # Run the command to add a student that returns their ID
-        r_id = dao.addResource(r_title, r_link, r_owner_id)
-
-        # Return the resources' info with its newly generated ID as a json
-        print("POST - Resource: processed")
-        return jsonify(self.build_attr_dict(r_id, r_title, r_link, r_owner_id)), 201
-
     def getResourceByID(self, r_id):
         # Execute necessary operations to find the student by their ID
         dao = ResourcesDAO()
@@ -89,3 +75,80 @@ class Resources:
             return jsonify("DELETED"), 200
         else:
             return jsonify("NOT FOUND"), 404
+
+    def getPersonalResourcesBySId(self, s_id):
+        # Execute necessary operations
+        dao = ResourcesDAO()
+        resource_list = dao.getPersonalResourcesById(s_id)
+
+        if resource_list is None:
+            return jsonify("USER NOT REGISTERED"), 405
+
+        # Modify info in a json-friendly format
+        return_list = [self.build_map_dict(resource) for resource in resource_list]
+        print("GET - Student Resources: processed")
+        return jsonify(return_list)
+
+    def getCourseResourcesByCOId(self, co_id):
+        # Execute necessary operations
+        dao = ResourcesDAO()
+        resource_list = dao.getCourseResourcesById(co_id)
+
+        if resource_list is None:
+            return jsonify("COURSE NOT REGISTERED"), 405
+
+        # Modify info in a json-friendly format
+        return_list = [self.build_map_dict(resource) for resource in resource_list]
+        print("GET - Student Resources: processed")
+        return jsonify(return_list)
+
+    def getStudentResourcesById(self, s_id):
+        # Execute necessary operations
+        dao = ResourcesDAO()
+        resource_list = dao.getStudentResourcesById(s_id)
+
+        if resource_list is None:
+            return jsonify("USER NOT REGISTERED"), 405
+
+        # Modify info in a json-friendly format
+        return_list = [self.build_map_dict(resource) for resource in resource_list]
+        print("GET - Student Resources: processed")
+        return jsonify(return_list)
+
+    def addPersonalResource(self, r_json, s_id):
+        # Break down resource info from the given json
+        r_title = r_json["r_title"]
+        r_link = r_json["r_link"]
+        r_owner_id = r_json["r_owner_id"]
+
+        if r_owner_id != s_id:
+            return jsonify("IDs DON'T MATCH"), 405
+
+        dao = ResourcesDAO()
+
+        # Run the command to add a student that returns their ID
+        r_id = dao.addPersonalResource(r_title, r_link, r_owner_id)
+
+        if r_id is None:
+            return jsonify("USER NOT REGISTERED"), 405
+
+        # Return the resources' info with its newly generated ID as a json
+        print("POST - Resource: processed")
+        return jsonify(self.build_attr_dict(r_id, r_title, r_link, r_owner_id)), 201
+
+    def addCourseResource(self, r_json, co_id):
+        # Break down resource info from the given json
+        r_title = r_json["r_title"]
+        r_link = r_json["r_link"]
+        r_owner_id = r_json["r_owner_id"]
+        dao = ResourcesDAO()
+
+        # Run the command to add a student that returns their ID
+        r_id = dao.addCourseResource(r_title, r_link, r_owner_id, co_id)
+
+        if r_id is None:
+            return jsonify("NOT ENROLLED or USER/COURSE NOT REGISTERED"), 405
+
+        # Return the resources' info with its newly generated ID as a json
+        print("POST - Resource: processed")
+        return jsonify(self.build_attr_dict(r_id, r_title, r_link, r_owner_id)), 201

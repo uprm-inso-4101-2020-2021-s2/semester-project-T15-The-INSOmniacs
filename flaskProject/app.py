@@ -81,12 +81,10 @@ def getStudentTasksByID(s_id):
 # Resource Management Routes
 
 
-@app.route("/OfCourse/resources/")
+@app.route("/OfCourse/resources/", methods=["GET"])
 def manageResources():
     if request.method == "GET":
         return Resources().getAllResources()
-    elif request.method == "POST":
-        return Resources().addResource(r_json=request.json)
     else:
         return jsonify("Method Not Allowed"), 405
 
@@ -102,8 +100,30 @@ def manageResource(r_id):
     else:
         return jsonify("Method Not Allowed"), 405
 
+@app.route("/OfCourse/resources/personal/<int:s_id>", methods=["GET", "POST"])
+def managePersonalResources(s_id):
+    if request.method == "GET":
+        return Resources().getPersonalResourcesBySId(s_id)
+    elif request.method == "POST":
+        return Resources().addPersonalResource(request.json, s_id)
+    else:
+        return jsonify("Method Not Allowed"), 405
 
-# Calendar Management Routes
+@app.route("/OfCourse/resources/courses/<int:co_id>", methods=["GET", "POST"])
+def manageCourseResources(co_id):
+    if request.method == "GET":
+        return Resources().getCourseResourcesByCOId(co_id)
+    elif request.method == "POST":
+        return Resources().addCourseResource(request.json, co_id)
+    else:
+        return jsonify("Method Not Allowed"), 405
+
+@app.route("/OfCourse/resources/students/<int:s_id>", methods=["GET"])
+def manageStudentResources(s_id):
+    if request.method == "GET":
+        return Resources().getStudentResourcesById(s_id)
+    else:
+        return jsonify("Method Not Allowed"), 405
 
 
 if __name__ == '__main__':
