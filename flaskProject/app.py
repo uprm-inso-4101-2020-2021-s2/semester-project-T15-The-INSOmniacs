@@ -72,11 +72,21 @@ def manageTasks(t_id):
 
 
 @app.route("/OfCourse/tasks/personal/<int:s_id>", methods=["GET", "POST"])
-def managePersonalTasksByID(s_id):
+def managePersonalTasks(s_id):
     if request.method == "GET":
         return Tasks().getAllPersonalTasksByID(s_id)
     elif request.method == "POST":
         return Tasks().addPersonalTask(s_id, request.json)
+    else:
+        return jsonify("Method Not Allowed"), 405
+
+
+@app.route("/OfCourse/tasks/courses/<int:co_id>", methods=["GET", "POST"])
+def manageCourseTasks(co_id):
+    if request.method == "GET":
+        return Tasks().getAllCourseTasksByID(co_id)
+    elif request.method == "POST":
+        return Tasks().addCourseTask(co_id, request.json)
     else:
         return jsonify("Method Not Allowed"), 405
 
