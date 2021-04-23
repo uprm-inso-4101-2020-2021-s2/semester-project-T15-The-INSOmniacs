@@ -68,6 +68,34 @@ class Tasks:
         else:
             return jsonify("Not Found"), 404
 
+    def getAllPersonalTasksByID(self, s_id):
+        dao = TasksDAO()
+        task_list = dao.getAllPersonalTasksByID(s_id)
+        if task_list == -1:
+            return jsonify("Student not found"), 404
+        elif not task_list:
+            return jsonify("No personal tasks found"), 404
+        else:
+            result_list = [self.build_map_dict(task) for task in task_list]
+            return jsonify(result_list), 200
+
+    def addPersonalTask(self, s_id, json):
+        t_type = json["t_type"]
+        t_title = json["t_title"]
+        t_description = json["t_description"]
+        t_due_date = json["t_due_date"]
+        t_due_time = json["t_due_time"]
+        dao = TasksDAO()
+
+        # Returns the t_id of created task or None if student was not found
+        t_id = dao.addPersonalTask(
+            t_type, t_title, t_description, t_due_date, t_due_time, s_id)
+
+        if not t_id:
+            return jsonify("Student not found"), 404
+        else:
+            return jsonify(self.build_attr_dict(t_id, t_type, t_title, t_description, t_due_date, t_due_time)), 201
+
     def getStudentTasksByID(self, s_id):
         dao = TasksDAO()
         task_list = dao.getStudentTasksByID(s_id)
