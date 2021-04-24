@@ -5,6 +5,23 @@ class StudentsDAO:
     def __init__(self):
         connect(self)
 
+    def loginStudent(self, s_email, s_password):
+        cursor = self.conn.cursor()
+        # Get the student info if the email and password match
+        query = " \
+        select * \
+        from students \
+        where s_email = %s and s_password = %s"
+        # Execute query
+        cursor.execute(query, (s_email, s_password, ))
+        # None if credentials didn't match a student
+        if not cursor.rowcount:
+            return None
+        # Return the info otherwise
+        s_info = cursor.fetchone()
+        return s_info
+
+
     def getAllStudents(self):
         # Create a cursor that acts as our database management helper
         cursor = self.conn.cursor()

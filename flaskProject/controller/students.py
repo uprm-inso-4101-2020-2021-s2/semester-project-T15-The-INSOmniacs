@@ -29,6 +29,17 @@ class Students:
 
     # DAO = Data Access Object
 
+    def loginStudent(self, s_json):
+        # Tries to connect to an account given a json with the email and password
+        dao = StudentsDAO()
+        s_email = s_json["s_email"]
+        s_password = s_json["s_password"]
+
+        s_id = dao.loginStudent(s_email, s_password)
+        if s_id is None:
+            return jsonify("Email/password combitation not valid")
+        return jsonify(self.build_map_dict(s_id))
+
     def getAllStudents(self):
         # Execute necessary operations
         dao = StudentsDAO()

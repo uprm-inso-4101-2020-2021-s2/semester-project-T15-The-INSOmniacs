@@ -29,6 +29,13 @@ def manageStudents():
     else:
         return jsonify("Method Not Allowed"), 405
 
+@app.route("/OfCourse/students/login", methods=["GET"])
+def login():
+    if request.method == "GET":
+        # Returns student id if credentials are correct
+        return Students().loginStudent(request.json)
+    else:
+        return jsonify("Method Not Allowed"), 405
 
 @app.route("/OfCourse/students/<int:s_id>", methods=["GET", "PUT", "DELETE"])
 def manageStudent(s_id):
