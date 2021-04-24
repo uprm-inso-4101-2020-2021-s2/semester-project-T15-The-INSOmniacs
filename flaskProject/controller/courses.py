@@ -1,5 +1,5 @@
 from flask import jsonify
-from model.resources import CoursesDAO
+from model.courses import CoursesDAO
 
 class Courses:
     def build_map_dict(self, row):
@@ -15,4 +15,9 @@ class Courses:
         }
         return result
 
+    def getAllCourses(self):
+        dao = CoursesDAO()
+        courses_list = dao.getAllCourses()
+        result_list = [self.build_map_dict(course) for course in courses_list]
+        return jsonify(result_list), 200
 
