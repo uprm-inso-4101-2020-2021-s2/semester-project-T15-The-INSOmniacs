@@ -149,5 +149,18 @@ def manageStudentResources(s_id):
         return jsonify("Method Not Allowed"), 405
 
 
+
+@app.route("/OfCourse/courses", methods=["GET","POST"])
+def manageStudentResources(s_id):
+    if request.method == "GET":
+        return Resources().getStudentResourcesById(s_id)
+    elif request.method == "POST":
+        return jsonify("Method Not Allowed"), 405
+    else:
+        return jsonify("Method Not Allowed"), 405
+
+
+
+
 if __name__ == '__main__':
     app.run(debug=True)
