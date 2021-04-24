@@ -8,6 +8,9 @@ function Nav() {
 
   return (
     <nav>
+        <Link style={navStyle} to="/signupandlogin">
+            <li>SignUp/Login</li>
+        </Link> 
         <Link style={navStyle} to="/">
                 <h3>Logo</h3>
         </Link>
