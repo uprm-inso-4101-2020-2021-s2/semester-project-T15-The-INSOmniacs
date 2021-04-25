@@ -14,3 +14,11 @@ class CoursesDAO:
         cursor.execute(query)
         result = [course for course in cursor]
         return result
+
+    def post_new_course(self,s_id, co_name, co_number, co_timeframe, co_professor, co_date_created, private_bool):
+        cursor = self.conn.cursor()
+        query = "insert into courses (s_id, co_name, co_number, co_timeframe, co_professor, co_date_created, private) \
+                values(%s, %s, %s , %s , %s , %s , %s) returning co_id;"
+        cursor.execute(query,(s_id, co_name, co_number, co_timeframe, co_professor, co_date_created, private_bool))
+        co_id = cursor.fetchone()[0]
+        return co_id
