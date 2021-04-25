@@ -150,7 +150,7 @@ def manageCourse():
     if request.method == "GET":
         return Courses().getAllCourses()
     elif request.method == "POST":
-        return jsonify("Method Not Allowed"), 405
+        return Courses().postNewCourse(request.json)
     else:
         return jsonify("Method Not Allowed"), 405
 

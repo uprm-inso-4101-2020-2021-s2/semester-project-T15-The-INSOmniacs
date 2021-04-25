@@ -21,3 +21,13 @@ class Courses:
         result_list = [self.build_map_dict(course) for course in courses_list]
         return jsonify(result_list), 200
 
+    def postNewCourse(self,course_json):
+        co_id = course_json["co_id"]
+        s_id = course_json["s_id"]
+        co_name = course_json["co_name"]
+        co_number = course_json["co_number"]
+        co_timeframe = course_json["co_professor"]
+        co_professor = course_json["co_professor"]
+        co_date_created = course_json["co_date_created"]
+        private_bool = course_json["private"]
+        dao = CoursesDAO()
