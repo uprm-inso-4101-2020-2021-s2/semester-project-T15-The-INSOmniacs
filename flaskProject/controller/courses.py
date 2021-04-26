@@ -59,3 +59,4 @@ class Courses:
         course = dao.get_course_by_id(co_id)
         result_list = self.build_map_dict(course)
         return jsonify(result_list), 200
+

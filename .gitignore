@@ -4,4 +4,3 @@
 .vscode/settings.json
 .env
 /flaskProject/config/config.py
-**/config
