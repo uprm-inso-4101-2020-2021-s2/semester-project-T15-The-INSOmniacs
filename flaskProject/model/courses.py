@@ -30,3 +30,7 @@ class CoursesDAO:
         cursor.execute(query, (co_id,))
         course = cursor.fetchone()
         return course
+    def modify_course_by_id(self,co_id,s_id,co_name,co_number,co_timeframe,co_professor,co_date_created,private_bool):
+        cursor = self.conn.cursor()
+        query = "update"
+        cursor.execute()

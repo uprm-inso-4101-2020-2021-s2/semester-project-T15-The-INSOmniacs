@@ -160,7 +160,7 @@ def editCourse(co_id):
     if request.method == "GET":
         return Courses().get_course_by_id(co_id)
     elif request.method == "PUT":
-        return Courses().modify_course_by_id(co_id)
+        return Courses().modify_course_by_id(request.json,co_id)
     elif request.method == "DELETE":
         return Courses().delete_course_by_id(co_id)
     else:
