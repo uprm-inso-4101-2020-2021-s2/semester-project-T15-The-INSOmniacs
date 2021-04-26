@@ -26,3 +26,7 @@ class CoursesDAO:
 
     def get_course_by_id(self, co_id):
         cursor = self.conn.cursor()
+        query = "select * from courses where co_id = %s"
+        cursor.execute(query, (co_id,))
+        course = cursor.fetchone()
+        return course
