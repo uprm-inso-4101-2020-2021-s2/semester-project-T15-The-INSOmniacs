@@ -25,7 +25,7 @@ const CoursesTab = () => {
 
   // Fetch Courses
   const fetchCourses = async () => {
-    const res = await fetch('https://of-course-app.herokuapp.com/courses')
+    const res = await fetch('https://of-course-app.herokuapp.com/OfCourse/courses', {method: 'GET'})
     const data = await res.json()
 
     return data
@@ -33,7 +33,7 @@ const CoursesTab = () => {
 
   // Fetch Course
   const fetchCourse = async (id) => {
-    const res = await fetch(`https://of-course-app.herokuapp.com/courses/${id}`)
+    const res = await fetch(`https://of-course-app.herokuapp.com/OfCourse/courses/${id}`, {method: 'GET'})
     const data = await res.json()
 
     return data
@@ -41,7 +41,7 @@ const CoursesTab = () => {
 
   // Add Course
   const addCourse = async (course) => {
-    const res = await fetch('https://of-course-app.herokuapp.com/courses', {
+    const res = await fetch('https://of-course-app.herokuapp.com/OfCourse/courses', {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
@@ -57,7 +57,7 @@ const CoursesTab = () => {
 
   // Delete Course
   const deleteCourse = async (id) => {
-    const res = await fetch(`https://of-course-app.herokuapp.com/courses/${id}`, {
+    const res = await fetch(`https://of-course-app.herokuapp.com/OfCourse/courses/${id}`, {
       method: 'DELETE',
     })
     res.status === 200
@@ -70,7 +70,7 @@ const CoursesTab = () => {
     const courseToToggle = await fetchCourse(id)
     const updCourse = { ...courseToToggle, reminder: !courseToToggle.reminder }
 
-    const res = await fetch(`https://of-course-app.herokuapp.com/courses/${id}`, {
+    const res = await fetch(`https://of-course-app.herokuapp.com/OfCourse/courses/${id}`, {
       method: 'PUT',
       headers: {
         'Content-type': 'application/json',
