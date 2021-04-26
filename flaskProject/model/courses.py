@@ -21,4 +21,8 @@ class CoursesDAO:
                 values(%s, %s, %s , %s , %s , %s , %s) returning co_id;"
         cursor.execute(query,(s_id, co_name, co_number, co_timeframe, co_professor, co_date_created, private_bool))
         co_id = cursor.fetchone()[0]
+        self.conn.commit()
         return co_id
+
+    def get_course_by_id(self, co_id):
+        cursor = self.conn.cursor()

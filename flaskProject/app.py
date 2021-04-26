@@ -155,6 +155,16 @@ def manageCourse():
         return jsonify("Method Not Allowed"), 405
 
 
+@app.route("/OfCourse/courses/<int:co_id>", methods=["GET","PUT","DELETE"])
+def editCourse(co_id):
+    if request.method == "GET":
+        return Courses().get_course_by_id(co_id)
+    elif request.method == "PUT":
+        return Courses().modify_course_by_id(co_id)
+    elif request.method == "DELETE":
+        return Courses().delete_course_by_id(co_id)
+    else:
+        return jsonify("Method Not Allowed"), 405
 
 
 if __name__ == '__main__':

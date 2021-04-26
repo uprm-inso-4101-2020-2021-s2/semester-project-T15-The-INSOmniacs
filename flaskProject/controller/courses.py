@@ -53,3 +53,9 @@ class Courses:
         print("POST - Course posted")
         return jsonify(self.build_map_attr(co_id, s_id,co_name,co_number,co_timeframe,co_professor,co_date_created,private_bool)),201
 
+
+    def get_course_by_id(self,co_id):
+        dao = CoursesDAO()
+        course = dao.get_course_by_id(co_id)
+        result_list = self.build_map_dict(course)
+        return jsonify(result_list), 200
