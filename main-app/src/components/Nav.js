@@ -12,7 +12,7 @@ function Nav() {
             <li>SignUp/Login</li>
         </Link> 
         <Link style={navStyle} to="/">
-                <h3>Logo</h3>
+                <h3>Home</h3>
         </Link>
         <ul className="nav-links">
             <Link style={navStyle} to="/calendar">

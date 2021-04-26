@@ -14,7 +14,7 @@ function App() {
     <div className="App">
       <Nav />
       <Switch>
-        <Route path="/" exact component={Dashboard}/>
+        <Route path="/" exact component={Home}/>
         <Route path="/about" component={About}/>
         <Route path="/calendar" component={Calendar}/>
         <Route path="/tasks" component={Tasks}/>
@@ -27,9 +27,11 @@ function App() {
   );
 }
 
-const Dashboard = () => (
+const Home = () => (
   <div>
-    <h1> Dashboard</h1>
+    <img src={'OfCourseLogo.jpeg'} className="ofc-logo"
+        alt="logo" />
+        <p>Your primary coursework organizer!</p>
   </div>
 )
 export default App;
