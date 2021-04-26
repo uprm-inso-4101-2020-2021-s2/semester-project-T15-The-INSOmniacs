@@ -5,6 +5,7 @@ import About from './components/About';
 import Tasks from './components/TasksTab';
 import Courses from './components/CoursesTab';
 import Resources from './components/Resources';
+import SignUpAndLogin from './components/SignUpAndLogin';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         <Route path="/tasks" component={Tasks}/>
         <Route path="/courses" component={Courses}/>
         <Route path="/resources" component={Resources}/>
+        <Route path="/signupandlogin" component={SignUpAndLogin}/>
       </Switch>
     </div>
     </Router>

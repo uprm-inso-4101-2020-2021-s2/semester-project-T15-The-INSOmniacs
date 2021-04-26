@@ -1,54 +1,53 @@
 import { useState } from 'react'
 
 const AddTask = ({ onAdd }) => {
-  const [course, setCourse] = useState('')
-  const [text, setText] = useState('')
-  const [day, setDay] = useState('')
-  const [time, setTime] = useState('')
-  const [description, setDescription] = useState('')
-  const [reminder, setReminder] = useState(false)
+  const [t_title, setTitle] = useState('')
+  const [t_due_date, setDate] = useState('')
+  const [t_due_time, setTime] = useState('')
+  const [t_description, setDescription] = useState('')
+  const [t_type, setType] = useState('')
 
   const onSubmit = (e) => {
     e.preventDefault()
 
-    if (!text) {
+    if (!t_title) {
       alert('Please add a task')
       return
     }
 
-    if (!day) {
+    if (!t_due_date) {
       alert('Please state the date of your dealine/task.')
       return
     }
 
-    onAdd({ course, text, day, time, description, reminder })
+    onAdd({t_description, t_due_date, t_due_time, t_title, t_type})
 
-    setCourse('')
-    setText('')
-    setDay('')
+    setTitle('')
+    setDate('')
     setTime('')
     setDescription('')
-    setReminder(false)
+    setType('')
   }
 
   return (
     <form className='add-form' onSubmit={onSubmit}>
-      <div className='form-control'>
-        <label>Select course</label>
-        <input
-          type='text'
-          placeholder='Select Course'
-          value={course}
-          onChange={(e) => setCourse(e.target.value)}
-        />
-      </div>
+
       <div className='form-control'>
         <label>Task</label>
         <input
           type='text'
           placeholder='Task Title'
-          value={text}
-          onChange={(e) => setText(e.target.value)}
+          value={t_title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+      </div>
+      <div className='form-control'>
+        <label>Type</label>
+        <input
+          type='text'
+          placeholder='Type (ex. test, homework...)'
+          value={t_type}
+          onChange={(e) => setType(e.target.value)}
         />
       </div>
       <div className='form-control'>
@@ -56,8 +55,8 @@ const AddTask = ({ onAdd }) => {
         <input
           type='date'
           placeholder=''
-          value={day}
-          onChange={(e) => setDay(e.target.value)}
+          value={t_due_date}
+          onChange={(e) => setDate(e.target.value)}
         />
       </div>
       <div className='form-control'>
@@ -65,7 +64,7 @@ const AddTask = ({ onAdd }) => {
         <input
           type='time'
           placeholder=''
-          value={time}
+          value={t_due_time}
           onChange={(e) => setTime(e.target.value)}
         />
       </div>
@@ -74,17 +73,8 @@ const AddTask = ({ onAdd }) => {
         <input
           type='text'
           placeholder='Add an optional description'
-          value={description}
+          value={t_description}
           onChange={(e) => setDescription(e.target.value)}
-        />
-      </div>
-      <div className='form-control form-control-check'>
-        <label>Set Reminder</label>
-        <input
-          type='checkbox'
-          checked={reminder}
-          value={reminder}
-          onChange={(e) => setReminder(e.currentTarget.checked)}
         />
       </div>
 
