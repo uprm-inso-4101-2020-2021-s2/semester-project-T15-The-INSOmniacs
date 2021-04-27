@@ -57,6 +57,8 @@ class Courses:
     def get_course_by_id(self,co_id):
         dao = CoursesDAO()
         course = dao.get_course_by_id(co_id)
+        if not course:
+            return jsonify("Not Found"), 404
         result_list = self.build_map_dict(course)
         return jsonify(result_list), 200
 
@@ -76,3 +78,10 @@ class Courses:
                                            private_bool)), 201
 
 
+    def delete_course_by_id(self,co_id):
+        dao = CoursesDAO()
+        check_if_deleted = dao.delete_course_by_id(co_id)
+        if check_if_deleted:
+            return jsonify("Deleted course"),200
+        else:
+            return jsonify("Not found"),404

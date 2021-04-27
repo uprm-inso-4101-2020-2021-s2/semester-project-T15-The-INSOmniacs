@@ -37,3 +37,20 @@ class CoursesDAO:
         cursor.execute(query,(s_id, co_name, co_number, co_timeframe, co_professor, co_date_created, private_bool,co_id))
         self.conn.commit()
 
+    def delete_course_by_id(self, co_id):
+        cursor = self.conn.cursor()
+        query = "delete from enrolled where co_id = (%s)"
+        cursor.execute(query,(co_id,))
+        query = "delete from course_tasks where co_id = (%s)"
+        cursor.execute(query,(co_id,))
+        query = "delete from course_resources where co_id = (%s)"
+        cursor.execute(query, (co_id,))
+        query = "delete from course_chats where co_id = (%s)"
+        cursor.execute(query, (co_id,))
+        query = "delete from courses where co_id = (%s)"
+        cursor.execute(query,(co_id,))
+
+        # Check if there was a row deleted
+        affected = cursor.rowcount
+        self.conn.commit()
+        return affected
