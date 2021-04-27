@@ -135,16 +135,20 @@ class TasksDAO:
             return -1
 
         # Getting personal tasks
-        query = "select t_id, t_type, t_title, t_description, t_due_date, t_due_time \
-        from tasks natural inner join personal_tasks \
-        where s_id = %s;"
-        cursor.execute(query, (s_id,))
+        query = "\
+        select t_id, t_type, t_title, t_description, t_due_date, t_due_time \
+        from tasks \
+        where t_id IN ( \
+            select t_id \
+            from tasks natural inner join personal_tasks \
+            where s_id = %s \
+        ) or t_id IN ( \
+            select t_id \
+            from tasks natural inner join enrolled natural inner join course_tasks \
+            where s_id = %s \
+        );"
+
+        cursor.execute(query, (s_id, s_id, ))
         result_list = [task for task in cursor]
 
-        # Getting all course tasks
-        query = "select t_id, t_type, t_title, t_description, t_due_date, t_due_time \
-        from tasks natural inner join enrolled natural inner join course_tasks \
-        where s_id = %s;"
-        cursor.execute(query, (s_id,))
-        result_list.extend([task for task in cursor])
         return result_list

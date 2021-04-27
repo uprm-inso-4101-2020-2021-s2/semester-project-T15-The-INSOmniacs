@@ -66,24 +66,23 @@ class ResourcesDAO:
             # USER NOT REGISTERED
             return None
 
-        # Personal Resources
-        query = "\
+        # Resources
+        query = " \
         select r_id, r_title, r_link, r_owner_id \
-        from resources natural inner join personal_resources \
-        where s_id = %s"
+        from resources \
+        where r_id IN ( \
+            select r_id \
+            from resources natural inner join personal_resources \
+            where s_id = %s \
+        ) or r_id IN ( \
+            select r_id \
+            from resources natural inner join enrolled natural inner join course_resources \
+            where s_id = %s \
+        );"
 
-        cursor.execute(query, (s_id,))
+        cursor.execute(query, (s_id, s_id, ))
         # Save current results our cursor received as a list of tuples
         result = [resource for resource in cursor]
-
-        # Course Resources
-        query = "\
-        select r_id, r_title, r_link, r_owner_id \
-        from resources natural inner join enrolled natural inner join course_resources \
-        where s_id = %s"
-        cursor.execute(query, (s_id,))
-        # Add the additional results our cursor received as a list of tuples
-        result.extend([resource for resource in cursor])
 
         return result
 

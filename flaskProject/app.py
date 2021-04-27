@@ -4,6 +4,8 @@ from controller.students import Students
 from controller.tasks import Tasks
 from controller.resources import Resources
 from controller.courses import Courses
+from controller.miscellaneous import Miscellaneous
+
 app = Flask(__name__)
 CORS(app)
 
@@ -170,6 +172,13 @@ def editCourse(co_id):
         return Courses().modify_course_by_id(request.json,co_id)
     elif request.method == "DELETE":
         return Courses().delete_course_by_id(co_id)
+    else:
+        return jsonify("Method Not Allowed"), 405
+
+@app.route("/OfCourse/students/events/<int:s_id>", methods=["GET"])
+def upcomingEvents(s_id):
+    if request.method == "GET":
+        return Miscellaneous().getUpcomingEvents(s_id)
     else:
         return jsonify("Method Not Allowed"), 405
 
