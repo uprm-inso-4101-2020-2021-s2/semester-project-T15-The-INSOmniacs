@@ -1,4 +1,4 @@
-import Course from './Courses'
+import Course from './Course'
 
 const Courses = ({ courses, onDelete, onToggle }) => {
   return (

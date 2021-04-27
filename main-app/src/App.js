@@ -4,7 +4,7 @@ import Calendar from './components/Calendar';
 import About from './components/About';
 import Tasks from './components/TasksTab';
 import Courses from './components/CoursesTab';
-import Resources from './components/Resources';
+import Resources from './components/ResourcesTab';
 import SignUpAndLogin from './components/SignUpAndLogin';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
