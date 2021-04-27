@@ -35,7 +35,9 @@ class CoursesDAO:
         query = "update courses set s_id = (%s), co_name = (%s), co_number = (%s), co_timeframe = (%s), co_professor = (%s) \
                   ,co_date_created = (%s), private = (%s) where co_id = (%s)  "
         cursor.execute(query,(s_id, co_name, co_number, co_timeframe, co_professor, co_date_created, private_bool,co_id))
+        affected = cursor.rowcount
         self.conn.commit()
+        return affected
 
     def delete_course_by_id(self, co_id):
         cursor = self.conn.cursor()

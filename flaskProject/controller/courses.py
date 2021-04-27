@@ -71,11 +71,12 @@ class Courses:
         co_date_created = course_json["co_date_created"]
         private_bool = course_json["private"]
         dao = CoursesDAO()
-        dao.modify_course_by_id(co_id,s_id,co_name,co_number,co_timeframe,co_professor,co_date_created,private_bool)
-
-        print("MODIFIED - Course")
-        return jsonify(self.build_map_attr(co_id, s_id, co_name, co_number, co_timeframe, co_professor, co_date_created,
+        modified = dao.modify_course_by_id(co_id,s_id,co_name,co_number,co_timeframe,co_professor,co_date_created,private_bool)
+        if modified:
+            print("MODIFIED - Course")
+            return jsonify(self.build_map_attr(co_id, s_id, co_name, co_number, co_timeframe, co_professor, co_date_created,
                                            private_bool)), 201
+        
 
 
     def delete_course_by_id(self,co_id):
