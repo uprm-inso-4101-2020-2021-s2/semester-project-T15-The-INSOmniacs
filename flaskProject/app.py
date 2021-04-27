@@ -3,7 +3,7 @@ from flask_cors import CORS
 from controller.students import Students
 from controller.tasks import Tasks
 from controller.resources import Resources
-
+from controller.courses import Courses
 app = Flask(__name__)
 CORS(app)
 
@@ -49,11 +49,6 @@ def manageStudent(s_id):
         return jsonify("Method Not Allowed"), 405
 
 
-# Course Management Routes
-
-@app.route("/OfCourse/courses/")
-def addCourse():
-    return "foo"
 
 
 # Task Management Routes
@@ -152,6 +147,29 @@ def manageCourseResources(co_id):
 def manageStudentResources(s_id):
     if request.method == "GET":
         return Resources().getStudentResourcesById(s_id)
+    else:
+        return jsonify("Method Not Allowed"), 405
+
+
+
+@app.route("/OfCourse/courses", methods=["GET","POST"])
+def manageCourse():
+    if request.method == "GET":
+        return Courses().getAllCourses()
+    elif request.method == "POST":
+        return Courses().postNewCourse(request.json)
+    else:
+        return jsonify("Method Not Allowed"), 405
+
+
+@app.route("/OfCourse/courses/<int:co_id>", methods=["GET","PUT","DELETE"])
+def editCourse(co_id):
+    if request.method == "GET":
+        return Courses().get_course_by_id(co_id)
+    elif request.method == "PUT":
+        return Courses().modify_course_by_id(request.json,co_id)
+    elif request.method == "DELETE":
+        return Courses().delete_course_by_id(co_id)
     else:
         return jsonify("Method Not Allowed"), 405
 
