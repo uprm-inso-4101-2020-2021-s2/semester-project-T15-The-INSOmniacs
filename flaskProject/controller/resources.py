@@ -54,7 +54,7 @@ class Resources:
         r_owner_id = r_json["r_owner_id"]
         # Execute via DAO
         dao = ResourcesDAO()
-        edited = dao.updateStudentByID(r_id, r_title, r_link, r_owner_id, old_r_id)
+        edited = dao.updateResourceByID(r_id, r_title, r_link, r_owner_id, old_r_id)
         # Return a json with the resources' new info
         print("PUT - Resource: processed")
         if edited == 2:
@@ -126,7 +126,7 @@ class Resources:
 
         dao = ResourcesDAO()
 
-        # Run the command to add a student that returns their ID
+        # Run the command to add a resource that returns their ID
         r_id = dao.addPersonalResource(r_title, r_link, r_owner_id)
 
         if r_id is None:
@@ -143,7 +143,7 @@ class Resources:
         r_owner_id = r_json["r_owner_id"]
         dao = ResourcesDAO()
 
-        # Run the command to add a student that returns their ID
+        # Run the command to add a resource that returns their ID
         r_id = dao.addCourseResource(r_title, r_link, r_owner_id, co_id)
 
         if r_id is None:
